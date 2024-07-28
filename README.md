@@ -1,3 +1,3 @@
 ## Architecture
 
-![Alt text](fileAuto.png)
+![Alt text](arch.jpeg)
