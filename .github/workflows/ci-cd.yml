@@ -25,11 +25,11 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Build and push Docker image for Web
+    - name: Build and push Docker image
       run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/real-estate-api:latest -f ./Dockerfile .
-        docker push ${{ secrets.DOCKER_USERNAME }}/real-estate-api:latest
-    - name: Deploy Web to EC2
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/fastapi-dynamodb-api:latest -f ./Dockerfile .
+        docker push ${{ secrets.DOCKER_USERNAME }}/fastapi-dynamodb-api:latest
+    - name: Deploy to EC2
       env:
         EC2_USER: ${{ secrets.EC2_USER }}
         EC2_IP: ${{ secrets.EC2_IP }}
@@ -40,6 +40,6 @@ jobs:
         ssh -i ec2_key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_IP }} << 'EOF'
           sudo systemctl start docker
           sudo systemctl enable docker
-          docker pull ${{ secrets.DOCKER_USERNAME }}/real-estate-api:latest
-          docker-compose -f /home/ec2-user/realestate-fullstack/docker-compose.yml up -d --no-build
+          docker pull ${{ secrets.DOCKER_USERNAME }}/fastapi-dynamodb-api:latest
+          docker-compose -f /home/ec2-user/docker-compose.yml up -d --no-build
         EOF
