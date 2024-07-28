@@ -13,8 +13,8 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 # Copy the FastAPI code into the container
 COPY . .
 
-# Expose port 80 to the outside world
-EXPOSE 80
+# Expose port 8080 to the outside world
+EXPOSE 8080
 
 # Command to run the application
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
