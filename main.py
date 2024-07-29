@@ -25,7 +25,7 @@ class Item(BaseModel):
 
 @app.get("/")
 def read_root():
-    return {"FastAPI": "World"}
+    return {"FastAPI & DynamoDB": "Microservice"}
 
 @app.post("/items")
 def create_item(item: Item):
